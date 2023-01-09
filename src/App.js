@@ -165,6 +165,7 @@ function App() {
           "msg": [
             {
               "type": "ripple-sdk/MsgSend",
+              "DestinationTag":desttag,
               "value": {
                 "amount": [
                   {
@@ -185,13 +186,6 @@ function App() {
       let unsignedTx = {
         "HDwalletPayload": {
           addressNList: [ 2147483692, 2147483792, 2147483648, 0, 0 ],
-          // "addressNList": [
-          //   2147483692,
-          //   2147483708,
-          //   2147483648,
-          //   0,
-          //   0
-          // ],
           tx:tx,
           flags: undefined,
           sequence,
