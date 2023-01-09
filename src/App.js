@@ -109,22 +109,29 @@ function App() {
       const ledgerIndexCurrent = await client.getLedgerIndex()
       console.log("ledgerIndexCurrent: ",ledgerIndexCurrent)
       setLedgerIndexCurrent(ledgerIndexCurrent)
-      console.log("checkpoint3")
-      const response = await client.request({
-        "command": "account_info",
-        "account": address,
-        "ledger_index": "validated"
-      })
-      console.log("checkpoint4")
-      console.log(response.result.account_data)
-      let balance = response.result.account_data.Balance
-      let sequence = response.result.account_data.Sequence
+      setIsLoading(false)
+
+      try{
+        console.log("checkpoint3")
+        const response = await client.request({
+          "command": "account_info",
+          "account": address,
+          "ledger_index": "validated"
+        })
+        console.log("checkpoint4")
+        console.log(response.result.account_data)
+        let balance = response.result.account_data.Balance
+        let sequence = response.result.account_data.Sequence
 
 
-      console.log("sequence: ", sequence)
-      //set balance
-      setBalance(balance / 1000000)
-      setSequence(sequence.toString())
+        console.log("sequence: ", sequence)
+        //set balance
+        setBalance(balance / 1000000)
+        setSequence(sequence.toString())
+      }catch(e){
+        setError("This account in unfunded. You must deposit 10xrp to be given permission to use the ripple network.")
+      }
+
       setIsLoading(false)
     }catch(e){
       console.error(e)
