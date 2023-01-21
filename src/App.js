@@ -38,7 +38,8 @@ let configKeepKey = {
   pairingInfo:{
     name: process.env['REACT_SERVICE_NAME'] || 'SAMPLE NAME',
     imageUrl: process.env['REACT_SERVICE_IMAGE_URL'] || 'https://assets.coincap.io/assets/icons/bitcoin@2x.png',
-    basePath:spec
+    basePath:spec,
+    url:"https://ripple-dapp.vercel.app/"
   }
 }
 const configPioneer = {
