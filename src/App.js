@@ -201,7 +201,7 @@ function App() {
           payment: {
             amount: parseInt(amount * 1000000).toString(),
             destination: toAddress,
-            destinationTag: "1234567890",
+            destinationTag: desttag,
           },
         },
         "verbal": "Ripple transaction"
@@ -311,7 +311,7 @@ function App() {
                         <input type="text"
                                name="address"
                                value={toAddress}
-                               placeholder="XwNbd46qdmbVWLdXievBhBMW7JYy8WiE7n"
+                               placeholder="XwN............"
                                onChange={handleInputChangeAddress}
                         />
                       </div>
