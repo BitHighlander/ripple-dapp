@@ -36,15 +36,15 @@ const xrpl = require("xrpl")
 let spec = 'http://localhost:1646/spec/swagger.json'
 let configKeepKey = {
   pairingInfo:{
-    name: process.env['REACT_SERVICE_NAME'] || 'SAMPLE NAME',
-    imageUrl: process.env['REACT_SERVICE_IMAGE_URL'] || 'https://assets.coincap.io/assets/icons/bitcoin@2x.png',
+    name: process.env['REACT_SERVICE_NAME'] || 'ripple-dapp',
+    imageUrl: process.env['REACT_SERVICE_IMAGE_URL'] || 'https://assets.coincap.io/assets/icons/xrp@2x.png',
     basePath:spec,
     url:"https://ripple-dapp.vercel.app/"
   }
 }
 const configPioneer = {
   queryKey:'sdk:test-tutorial-medium',
-  username:"sample-dapp",
+  username:"ripple-dapp",
   spec:"https://pioneers.dev/spec/swagger.json"
   // spec:"http://localhost:9001/spec/swagger.json"
 }
