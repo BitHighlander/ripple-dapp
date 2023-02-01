@@ -82,6 +82,7 @@ function App() {
       //init
       let sdk
       try{
+        configKeepKey.apiKey = localStorage.getItem("apiKey");
         sdk = await KeepKeySdk.create(configKeepKey)
         localStorage.setItem("apiKey",configKeepKey.apiKey);
         console.log("config: ",configKeepKey.apiKey)
