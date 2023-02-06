@@ -60,7 +60,7 @@ function App() {
   const [ledgerIndexCurrent, setLedgerIndexCurrent] = useState('')
   const [amount, setAmount] = useState('0.00000000')
   const [toAddress, setToAddress] = useState('')
-  const [desttag, setDesttag] = useState('')
+  let [desttag, setDesttag] = useState('')
   const [txid, setTxid] = useState(null)
   const [signedTx, setSignedTx] = useState(null)
   const [keepkeyConnected, setKeepKeyConnected] = useState(false)
@@ -68,6 +68,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(null)
+  const [maxAmountSpendable, setMaxAmountSpendable] = useState(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   //onStart
@@ -82,7 +83,7 @@ function App() {
       //init
       let sdk
       try{
-        configKeepKey.apiKey = localStorage.getItem("apiKey");
+        configKeepKey.apiKey = localStorage.getItem("apiKey") || 'test123' ;
         sdk = await KeepKeySdk.create(configKeepKey)
         localStorage.setItem("apiKey",configKeepKey.apiKey);
         console.log("config: ",configKeepKey.apiKey)
@@ -129,6 +130,8 @@ function App() {
         console.log("sequence: ", sequence)
         //set balance
         setBalance(balance / 1000000)
+        let maxAmountSpendable = (balance / 1000000) - 10
+        setMaxAmountSpendable(maxAmountSpendable)
         setSequence(sequence.toString())
       }catch(e){
         setError("This account in unfunded. You must deposit 10xrp to be given permission to use the ripple network.")
@@ -157,7 +160,7 @@ function App() {
       console.log("config: ",configKeepKey.apiKey)
 
       let fromAddress = address
-
+      if(!desttag) desttag = "0"
       let tx = {
         "type": "auth/StdTx",
         "value": {
@@ -297,6 +300,8 @@ function App() {
                       <Heading size='xs' textTransform='uppercase'>
                         amount:
                       </Heading>
+                      <small>Ripple tax's the network 10xrp for its use. You must leave 10xrp in an address. </small>
+                      <div>max amount spendable: {maxAmountSpendable}</div>
                       <div>
                         <input type="text"
                                name="amount"
